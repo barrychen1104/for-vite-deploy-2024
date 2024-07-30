@@ -9,7 +9,7 @@ function clickMe() {
 const htmlTemplate = `<h1>我是HTML標題</h1>`;
 const text = ref('Hello, Vite!');
 const city = ref('台北市');
-const isChecked = ref(true);
+const isChecked = ref(false);
 const arrayCheckbox = ref([]);
 const radioValue = ref('男');
 
@@ -23,8 +23,24 @@ const handleClick = () => {
 const submitForm = () => {
   console.log('表單被觸發了');
 }
-
 const text2 = ref('一段文字');
+
+// v-for 搭配陣列
+const array = ref([{
+  id: '1',
+  name: '小明',
+  age: 18
+}, {
+  id: '2',
+  name: '小花',
+  age: 20
+}, {
+  id: '3',
+  name: '小華',
+  age: 22
+}]);
+
+// v-if, v-else, v-show
 
 </script>
 
@@ -93,6 +109,31 @@ const text2 = ref('一段文字');
       <h2>按鍵修飾符</h2>
       <input type="text" @keydown.enter="handleClick" v-model="text2">
     </div>
+
+    <br><br><br><br>
+
+    <div>
+      姓名 : {{ array[0].name }}
+      年齡 : {{ array[0].age }}
+      <hr>
+    </div>
+
+    <div v-for="(item, key) in array" :key="item.id">
+      索引 : {{ key }}
+      姓名 : {{ item.name }}
+      年齡 : {{ item.age }}
+      <div v-if="item.age > 18">大於18歲</div>
+      <div v-else>小於18歲</div>
+      <hr>
+    </div>
+
+    <hr>
+    <input type="checkbox" v-model="isChecked">{{ isChecked }}
+
+    <h1 v-if="isChecked">當 isChecked === true 會顯示這行</h1>
+    <!-- <h1 v-else>目前的 isChecked 為 false</h1> -->
+
+    <h1 v-show="isChecked">當 isChecked === true 會顯示這行</h1>
 
   </div>
 </template>
